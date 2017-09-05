@@ -61,8 +61,16 @@ RCT_EXPORT_METHOD(initWithAPIKey: (NSString *) apiKey userIdentifier: (NSString 
 
 - (void)shopJoyReportsOutdatedCampaign:(NSString *)campaignID {
     NSLog(@"ShopJoy reports outdated campaign");
-    [self postNotificationName: kShopJoyReportsOutdatedCampaign withPayload: @{@"message" : @"Reporting outdated campaign", @"data": campaignId}];
+    [self postNotificationName: kShopJoyReportsOutdatedCampaign withPayload: @{@"message" : @"Reporting outdated campaign", @"data": campaignID}];
 }
+
+- (void)postNotificationName:(NSString *)name withPayload:(NSDictionary *)payload {
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:name
+                                                        object:self
+                                                      userInfo:payload];
+}
+
 
 @end
 

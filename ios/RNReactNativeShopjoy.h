@@ -11,6 +11,8 @@
 #import <React/RCTEventEmitter.h>
 #endif
 
+#import "ShopJoyHeaders.h"
+
 @interface RNReactNativeShopjoy : RCTEventEmitter <RCTBridgeModule, ShopJoyManagerDelegate>
 
 @end
