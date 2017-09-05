@@ -47,9 +47,9 @@ RCT_EXPORT_MODULE()
 
 #pragma mark - public methods.
 
-RCT_EXPORT_METHOD(initWithAPIKey: (NSString *) apiKey userIdentifier: (NSString *) userIdentifier idfa:(NSString *) idfa)
+RCT_EXPORT_METHOD(initWithAPIKey: (NSString *) apiKey userIdentifier: (NSString *) userIdentifier)
 {
-    self.shopJoyManager = [[ShopJoyManager alloc] initWithAPIKey:apiKey logLevel:ShopJoyLogLevelVerbose userIdentifier:userIdentifier idfa:idfa delegate:self];
+    self.shopJoyManager = [[ShopJoyManager alloc] initWithAPIKey:apiKey logLevel:ShopJoyLogLevelVerbose userIdentifier:userIdentifier idfa:nil delegate:self];
 }
 
 #pragma mark - Delegate methods.
