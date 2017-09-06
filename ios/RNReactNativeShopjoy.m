@@ -45,11 +45,17 @@ RCT_EXPORT_MODULE()
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-#pragma mark - public methods.
+#pragma mark - Public methods.
 
 RCT_EXPORT_METHOD(initWithAPIKey: (NSString *) apiKey userIdentifier: (NSString *) userIdentifier)
 {
     self.shopJoyManager = [[ShopJoyManager alloc] initWithAPIKey:apiKey logLevel:ShopJoyLogLevelVerbose userIdentifier:userIdentifier idfa:nil delegate:self];
+}
+
+#pragma mark - Private methods.
+
+- (void)handleNotification:(NSNotification *)notification {
+    [self sendEventWithName:notification.name body:notification.userInfo];
 }
 
 #pragma mark - Delegate methods.
