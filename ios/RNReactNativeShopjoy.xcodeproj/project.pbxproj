@@ -7,10 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6523967C1F5EBC5F0045C0F7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6523967B1F5EBC5F0045C0F7 /* CoreLocation.framework */; };
-		6523967E1F5EBC6E0045C0F7 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6523967D1F5EBC6E0045C0F7 /* CoreBluetooth.framework */; };
-		652396891F5EC1680045C0F7 /* libShopJoySDK.a in Sources */ = {isa = PBXBuildFile; fileRef = 652396871F5EC1630045C0F7 /* libShopJoySDK.a */; };
-		6523968A1F5EC1680045C0F7 /* ShopJoyHeaders.h in Sources */ = {isa = PBXBuildFile; fileRef = 652396881F5EC1630045C0F7 /* ShopJoyHeaders.h */; };
+		655BCFFA1F5FEF8100CF2537 /* libShopJoySDK.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 655BCFF81F5FEF7600CF2537 /* libShopJoySDK.a */; };
+		655BCFFB1F5FEF8100CF2537 /* ShopJoyHeaders.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 655BCFF91F5FEF7600CF2537 /* ShopJoyHeaders.h */; };
+		655BCFFE1F5FF94C00CF2537 /* libShopJoySDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 655BCFF81F5FEF7600CF2537 /* libShopJoySDK.a */; };
 		B3E7B58A1CC2AC0600A0062D /* RNReactNativeShopjoy.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNReactNativeShopjoy.m */; };
 /* End PBXBuildFile section */
 
@@ -21,6 +20,8 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				655BCFFA1F5FEF8100CF2537 /* libShopJoySDK.a in CopyFiles */,
+				655BCFFB1F5FEF8100CF2537 /* ShopJoyHeaders.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -31,9 +32,9 @@
 		6523967B1F5EBC5F0045C0F7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		6523967D1F5EBC6E0045C0F7 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		6523967F1F5EBC7E0045C0F7 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
-		652396871F5EC1630045C0F7 /* libShopJoySDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libShopJoySDK.a; sourceTree = "<group>"; };
-		652396881F5EC1630045C0F7 /* ShopJoyHeaders.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopJoyHeaders.h; sourceTree = "<group>"; };
 		653B860A1F5EE4A60018E009 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		655BCFF81F5FEF7600CF2537 /* libShopJoySDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libShopJoySDK.a; path = shopjoy_ios_sdk_v2_rc17/libShopJoySDK.a; sourceTree = "<group>"; };
+		655BCFF91F5FEF7600CF2537 /* ShopJoyHeaders.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopJoyHeaders.h; sourceTree = "<group>"; };
 		B3E7B5881CC2AC0600A0062D /* RNReactNativeShopjoy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNReactNativeShopjoy.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* RNReactNativeShopjoy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNReactNativeShopjoy.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -43,8 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6523967E1F5EBC6E0045C0F7 /* CoreBluetooth.framework in Frameworks */,
-				6523967C1F5EBC5F0045C0F7 /* CoreLocation.framework in Frameworks */,
+				655BCFFE1F5FF94C00CF2537 /* libShopJoySDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,7 +62,8 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-				652396861F5EC1630045C0F7 /* shopjoy_ios_sdk_v2_rc17 */,
+				655BCFFD1F5FF82100CF2537 /* lib */,
+				655BCFF71F5FEF7600CF2537 /* include */,
 				B3E7B5881CC2AC0600A0062D /* RNReactNativeShopjoy.h */,
 				B3E7B5891CC2AC0600A0062D /* RNReactNativeShopjoy.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
@@ -81,13 +82,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		652396861F5EC1630045C0F7 /* shopjoy_ios_sdk_v2_rc17 */ = {
+		655BCFF71F5FEF7600CF2537 /* include */ = {
 			isa = PBXGroup;
 			children = (
-				652396871F5EC1630045C0F7 /* libShopJoySDK.a */,
-				652396881F5EC1630045C0F7 /* ShopJoyHeaders.h */,
+				655BCFF91F5FEF7600CF2537 /* ShopJoyHeaders.h */,
 			);
+			name = include;
 			path = shopjoy_ios_sdk_v2_rc17;
+			sourceTree = "<group>";
+		};
+		655BCFFD1F5FF82100CF2537 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				655BCFF81F5FEF7600CF2537 /* libShopJoySDK.a */,
+			);
+			name = lib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,8 +155,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				652396891F5EC1680045C0F7 /* libShopJoySDK.a in Sources */,
-				6523968A1F5EC1680045C0F7 /* ShopJoyHeaders.h in Sources */,
 				B3E7B58A1CC2AC0600A0062D /* RNReactNativeShopjoy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -237,11 +244,16 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
+					"$(SRCROOT)/include",
 				);
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/shopjoy_ios_sdk_v2_rc17",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = RNReactNativeShopjoy;
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -253,11 +265,16 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
+					"$(SRCROOT)/include",
 				);
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/shopjoy_ios_sdk_v2_rc17",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = RNReactNativeShopjoy;
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
 		};
