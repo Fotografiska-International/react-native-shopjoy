@@ -78,6 +78,11 @@ RCT_EXPORT_METHOD(stopMonitoring)
     [self.shopJoyManager stopMonitoring];
 }
 
+RCT_EXPORT_METHOD(emptyMemory)
+{
+    [self.shopJoyManager emptyMemory];
+}
+
 #pragma mark - Private methods.
 
 - (void)handleNotification:(NSNotification *)notification {
@@ -88,8 +93,13 @@ RCT_EXPORT_METHOD(stopMonitoring)
 #pragma mark - Delegate methods.
 
 - (void)shopJoyCampaignTriggered:(ShopJoyCampaign *)campaign {
-    NSLog(@"%s %s", __PRETTY_FUNCTION__, __FUNCTION__);
-    [self postNotificationName: kShopJoyCampaignTriggered withPayload: @{@"data" : @"test: campaign triggered"}];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:campaign];
+    NSError* error;
+    NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data
+                                                         options:kNilOptions
+                                                           error:&error];
+    NSLog(@"%s %s %@ %@", __PRETTY_FUNCTION__, __FUNCTION__, json, error);
+    [self postNotificationName: kShopJoyCampaignTriggered withPayload: @{@"data" : json}];
 }
 
 - (void)shopJoyReportsOutdatedCampaign:(NSString *)campaignID {
