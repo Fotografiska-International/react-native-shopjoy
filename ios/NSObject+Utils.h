@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface NSObject (Utils)
-- (id) getValueForSelector: (NSString *) selector withType: (id) type;
+- (id) getAsDictionary;
 @end

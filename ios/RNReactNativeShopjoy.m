@@ -1,7 +1,7 @@
 
 #import "RNReactNativeShopjoy.h"
 #import "ShopJoyHeaders.h"
-#import "ShopJoyCampaign+React.h"
+#import "NSObject+Utils.h"
 
 NSString *const kShopJoyCampaignTriggered = @"shopJoyCampaignTriggered";
 NSString *const kShopJoyReportsOutdatedCampaign = @"shopJoyReportsOutdatedCampaign";
@@ -94,13 +94,8 @@ RCT_EXPORT_METHOD(emptyMemory)
 #pragma mark - Delegate methods.
 
 - (void)shopJoyCampaignTriggered:(ShopJoyCampaign *)campaign {
-//    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:campaign];
-//    NSError* error;
-//    NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data
-//                                                         options:kNilOptions
-//                                                           error:&error];
     NSLog(@"%s %s", __PRETTY_FUNCTION__, __FUNCTION__);
-    [self postNotificationName: kShopJoyCampaignTriggered withPayload: @{@"data" : [campaign getJson]}];
+    [self postNotificationName: kShopJoyCampaignTriggered withPayload: @{@"data" : [campaign getAsDictionary]}];
 }
 
 - (void)shopJoyReportsOutdatedCampaign:(NSString *)campaignID {
@@ -115,7 +110,7 @@ RCT_EXPORT_METHOD(emptyMemory)
 
 - (void)shopJoyQuestPartlyCompleted:(ShopJoyQuest *)quest {
     NSLog(@"%s %s", __PRETTY_FUNCTION__, __FUNCTION__);
-    [self postNotificationName: kShopJoyQuestPartlyCompleted withPayload: @{@"message" : @"Quest partly completed", @"data": quest}];
+    [self postNotificationName: kShopJoyQuestPartlyCompleted withPayload: @{@"message" : @"Quest partly completed", @"data": [quest getAsDictionary]}];
 }
 
 - (void)shopJoyReportsBluetoothState:(Boolean)ready {
