@@ -10,6 +10,7 @@
 		655BCFFA1F5FEF8100CF2537 /* libShopJoySDK.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 655BCFF81F5FEF7600CF2537 /* libShopJoySDK.a */; };
 		655BCFFB1F5FEF8100CF2537 /* ShopJoyHeaders.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 655BCFF91F5FEF7600CF2537 /* ShopJoyHeaders.h */; };
 		655BCFFE1F5FF94C00CF2537 /* libShopJoySDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 655BCFF81F5FEF7600CF2537 /* libShopJoySDK.a */; };
+		65CED3CE1F73BFF7001A0DB2 /* ShopJoyCampaign+React.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CED3CD1F73BFF7001A0DB2 /* ShopJoyCampaign+React.m */; };
 		B3E7B58A1CC2AC0600A0062D /* RNReactNativeShopjoy.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNReactNativeShopjoy.m */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +36,8 @@
 		653B860A1F5EE4A60018E009 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		655BCFF81F5FEF7600CF2537 /* libShopJoySDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libShopJoySDK.a; path = shopjoy_ios_sdk_v2_rc17/libShopJoySDK.a; sourceTree = "<group>"; };
 		655BCFF91F5FEF7600CF2537 /* ShopJoyHeaders.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopJoyHeaders.h; sourceTree = "<group>"; };
+		65CED3CC1F73BFF7001A0DB2 /* ShopJoyCampaign+React.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ShopJoyCampaign+React.h"; sourceTree = "<group>"; };
+		65CED3CD1F73BFF7001A0DB2 /* ShopJoyCampaign+React.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ShopJoyCampaign+React.m"; sourceTree = "<group>"; };
 		B3E7B5881CC2AC0600A0062D /* RNReactNativeShopjoy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNReactNativeShopjoy.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* RNReactNativeShopjoy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNReactNativeShopjoy.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -62,6 +65,8 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				65CED3CC1F73BFF7001A0DB2 /* ShopJoyCampaign+React.h */,
+				65CED3CD1F73BFF7001A0DB2 /* ShopJoyCampaign+React.m */,
 				655BCFFD1F5FF82100CF2537 /* lib */,
 				655BCFF71F5FEF7600CF2537 /* include */,
 				B3E7B5881CC2AC0600A0062D /* RNReactNativeShopjoy.h */,
@@ -155,6 +160,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65CED3CE1F73BFF7001A0DB2 /* ShopJoyCampaign+React.m in Sources */,
 				B3E7B58A1CC2AC0600A0062D /* RNReactNativeShopjoy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

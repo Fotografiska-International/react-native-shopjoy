@@ -1,6 +1,7 @@
 
 #import "RNReactNativeShopjoy.h"
 #import "ShopJoyHeaders.h"
+#import "ShopJoyCampaign+React.h"
 
 NSString *const kShopJoyCampaignTriggered = @"shopJoyCampaignTriggered";
 NSString *const kShopJoyReportsOutdatedCampaign = @"shopJoyReportsOutdatedCampaign";
@@ -93,13 +94,13 @@ RCT_EXPORT_METHOD(emptyMemory)
 #pragma mark - Delegate methods.
 
 - (void)shopJoyCampaignTriggered:(ShopJoyCampaign *)campaign {
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:campaign];
-    NSError* error;
-    NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data
-                                                         options:kNilOptions
-                                                           error:&error];
-    NSLog(@"%s %s %@ %@", __PRETTY_FUNCTION__, __FUNCTION__, json, error);
-    [self postNotificationName: kShopJoyCampaignTriggered withPayload: @{@"data" : json}];
+//    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:campaign];
+//    NSError* error;
+//    NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data
+//                                                         options:kNilOptions
+//                                                           error:&error];
+    NSLog(@"%s %s", __PRETTY_FUNCTION__, __FUNCTION__);
+    [self postNotificationName: kShopJoyCampaignTriggered withPayload: @{@"data" : [campaign getJson]}];
 }
 
 - (void)shopJoyReportsOutdatedCampaign:(NSString *)campaignID {
