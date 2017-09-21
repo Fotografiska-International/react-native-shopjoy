@@ -69,6 +69,17 @@ RCT_EXPORT_METHOD(initShopJoy: (NSString *) apiKey userIdentifier: (NSString *) 
     self.shopJoyManager = [[ShopJoyManager alloc] initWithAPIKey:apiKey logLevel:ShopJoyLogLevelVerbose userIdentifier:userIdentifier idfa:nil delegate:self];
 }
 
+RCT_EXPORT_METHOD(setUserIdentifier: (NSString *) userIdentifier)
+{
+    [self.shopJoyManager setUserIdentifier:userIdentifier];
+}
+
+RCT_EXPORT_METHOD(version: (RCTResponseSenderBlock) callback)
+{
+    NSString *version = [self.shopJoyManager version];
+     callback(@[[NSNull null], version]);
+}
+
 RCT_EXPORT_METHOD(startMonitoring)
 {
     [self.shopJoyManager startMonitoring];

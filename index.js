@@ -47,15 +47,11 @@ const shopJoy = {
       reminder => console.log(reminder.name),
     );
   },
-  startMonitoring: () => {
-    RNReactNativeShopjoy.startMonitoring();
-  },
-  stopMonitoring: () => {
-    RNReactNativeShopjoy.stopMonitoring();
-  },
-  emptyMemory: () => {
-    RNReactNativeShopjoy.emptyMemory();
-  }
+  startMonitoring: () => {RNReactNativeShopjoy.startMonitoring();},
+  stopMonitoring: () => {RNReactNativeShopjoy.stopMonitoring();},
+  emptyMemory: () => {RNReactNativeShopjoy.emptyMemory();},
+  setUserIdentifier: (userIdentifier) => {RNReactNativeShopjoy.setUserIdentifier(userIdentifier);},
+  version: (callback) => {RNReactNativeShopjoy.version(callback);},
 }
 
 export default shopJoy;
