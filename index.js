@@ -58,6 +58,16 @@ const shopJoy = {
   emptyMemory: () => {RNReactNativeShopjoy.emptyMemory();},
   setUserIdentifier: (userIdentifier) => {RNReactNativeShopjoy.setUserIdentifier(userIdentifier);},
   version: (callback) => {RNReactNativeShopjoy.version(callback);},
+  sendLogReportToShopJoyTeamWithMessage: (logReport) => {RNReactNativeShopjoy.sendLogReportToShopJoyTeamWithMessage(logReport);},
+  returnQuestMemory: (callback) => {RNReactNativeShopjoy.returnQuestMemory(callback);},
+  returnCampaignMemory: (callback) => {RNReactNativeShopjoy.returnCampaignMemory(callback);},
+  removeQuestFromMemory: (questId) => {RNReactNativeShopjoy.removeQuestFromMemory(questId);}, // Todo: Test
+  removeCampaignFromMemory: (campaignId) => {RNReactNativeShopjoy.removeCampaignFromMemory(campaignId);}, // Todo: Test
+  campaignWithId: (campaignId, callback) => {RNReactNativeShopjoy.campaignWithId(campaignId, callback);}, // Todo: Test
+  questWithId: (questId, callback) => {RNReactNativeShopjoy.questWithId(questId, callback);}, // Todo: Test
+  reloadRemoteConfiguration: () => {RNReactNativeShopjoy.reloadRemoteConfiguration();}, // Todo: Test
+  openedQuest: (questId) => {RNReactNativeShopjoy.openedQuest(questId);}, // Todo: Test
+  openedCampaign: (campaignId) => {RNReactNativeShopjoy.openedCampaign(campaignId);}, // Todo: Test
   setLogLevel: (logLevel) => {
     if (logLevel > 2 || logLevel < 0) {
       throw "ShopJoyLogLevel should be between 0 and 2";

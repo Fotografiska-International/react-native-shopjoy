@@ -100,6 +100,94 @@ RCT_EXPORT_METHOD(setLogLevel: (NSInteger) logLevel)
     [self.shopJoyManager setLogLevel:(ShopJoyLogLevel)logLevel];
 }
 
+RCT_EXPORT_METHOD(sendLogReportToShopJoyTeamWithMessage: (NSString *) logReport)
+{
+    [self.shopJoyManager sendLogReportToShopJoyTeamWithMessage:logReport];
+}
+
+RCT_EXPORT_METHOD(returnQuestMemory: (RCTResponseSenderBlock) callback)
+{
+    NSArray *questMemory = [self.shopJoyManager returnQuestMemory];
+    callback(@[questMemory]);
+}
+
+RCT_EXPORT_METHOD(returnCampaignMemory: (RCTResponseSenderBlock) callback)
+{
+    NSArray *campaignMemory = [self.shopJoyManager returnCampaignMemory];
+    callback(@[campaignMemory]);
+}
+
+RCT_EXPORT_METHOD(removeCampaignFromMemory: (NSString *) campaignId)
+{
+    @try {
+        ShopJoyCampaign *campaignToRemove = [self.shopJoyManager campaignWithId:campaignId];
+        [self.shopJoyManager removeCampaignFromMemory:campaignToRemove];
+    } @catch (NSException *exception) {
+        NSLog(@"Error removing campaign: %@", exception.description);
+    } @finally {
+    }
+}
+
+RCT_EXPORT_METHOD(removeQuestFromMemory: (NSString *) questId)
+{
+    @try {
+        ShopJoyQuest *questToRemove = [self.shopJoyManager questWithId:questId];
+        [self.shopJoyManager removeQuestFromMemory:questToRemove];
+    } @catch (NSException *exception) {
+        NSLog(@"Error removing quest: %@", exception.description);
+    } @finally {
+    }
+}
+
+RCT_EXPORT_METHOD(campaignWithId: (NSString *) campaignId callback: (RCTResponseSenderBlock) callback)
+{
+    @try {
+        ShopJoyCampaign *campaign = [self.shopJoyManager campaignWithId:campaignId];
+        callback(@[[campaign getAsDictionary]]);
+    } @catch (NSException *exception) {
+        NSLog(@"Error getting campaign with ID (%@): %@", campaignId, exception.description);
+    } @finally {
+    }
+}
+
+RCT_EXPORT_METHOD(questWithId: (NSString *) questId callback: (RCTResponseSenderBlock) callback)
+{
+    @try {
+        ShopJoyQuest *quest = [self.shopJoyManager questWithId:questId];
+        callback(@[[quest getAsDictionary]]);
+    } @catch (NSException *exception) {
+        NSLog(@"Error getting quest with ID (%@): %@", questId, exception.description);
+    } @finally {
+    }
+}
+
+RCT_EXPORT_METHOD(reloadRemoteConfiguration)
+{
+    [self.shopJoyManager reloadRemoteConfiguration];
+}
+
+RCT_EXPORT_METHOD(openedQuest: (NSString *) questId)
+{
+    @try {
+        ShopJoyQuest *quest = [self.shopJoyManager questWithId:questId];
+        [self.shopJoyManager openedQuest:quest];
+    } @catch (NSException *exception) {
+        NSLog(@"Error setting quest as opened: %@", exception.description);
+    } @finally {
+    }
+}
+
+RCT_EXPORT_METHOD(openedCampaign: (NSString *) campaignId)
+{
+    @try {
+        ShopJoyCampaign *campaign = [self.shopJoyManager campaignWithId:campaignId];
+        [self.shopJoyManager openedCampaign:campaign];
+    } @catch (NSException *exception) {
+        NSLog(@"Error setting campaign as opened: %@", exception.description);
+    } @finally {
+    }
+}
+
 #pragma mark - Private methods.
 
 - (void)handleNotification:(NSNotification *)notification {
