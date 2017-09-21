@@ -7,31 +7,60 @@
 //
 
 #import "ShopJoyCampaign+React.h"
+#import "NSObject+Utils.h"
+
+#define kBeaconIDs @"beaconIDs"
+#define kRevision @"revision"
+#define kCampaignID @"campaignID"
+#define kBaseCampaignID @"baseCampaignID"
+#define kActive @"active"
+#define kRead @"read"
+#define kTriggerRange @"triggerRange"
+#define kLastDownload @"lastDownload"
+#define kLastTrigger @"lastTrigger"
+#define kStartDate @"startDate"
+#define kEndDate @"endDate"
+#define kWaitingForTrigger @"waitingForTrigger"
+#define kLastUpdated @"lastUpdated"
+#define kTimeslots @"timeslots"
+#define kTitle @"title"
+#define kNotificationText @"notificationText"
+#define kSummary @"summary"
+#define kTriggerDelay @"triggerDelay"
+#define kShopJoyContentType @"shopJoyContentType"
+#define kContentData @"contentData"
+#define kMaximumProximity @"maximumProximity"
 
 @implementation ShopJoyCampaign (React)
 
 - (id) getJson {
-    return @{
-             @"beaconIDs": self.beaconIDs,
-             @"revision": @(self.revision),
-             @"campaignID": self.campaignID,
-             @"active": @(self.active),
-             @"read": @(self.read),
-             @"maximumProximity": @(self.maximumProximity),
-             @"lastDownload": self.lastDownload,
-             @"lastTrigger": self.lastTrigger,
-             @"startDate": self.startDate,
-             @"endDate": self.endDate,
-             @"waitingForTrigger": @(self.waitingForTrigger),
-             @"lastUpdated": self.lastUpdated,
-             @"timeslots": self.timeslots,
-             @"title": self.title,
-             @"notificationText": self.notificationText,
-             @"summary": self.summary,
-             @"triggerDelay": @(self.triggerDelay),
-             @"shopJoyContentType": @(self.shopJoyContentType),
-             @"contentData": self.contentData,
-             };
+    @try {
+        return @{
+                 kBeaconIDs: [self getValueForSelector:kBeaconIDs withType: [NSArray class]],
+                 kRevision: [self getValueForSelector:kRevision withType: [NSNumber class]],
+                 kCampaignID: [self getValueForSelector:kCampaignID withType: [NSString class]],
+                 kActive: [self getValueForSelector:kActive withType: [NSNumber class]],
+                 kRead: [self getValueForSelector:kRead withType: [NSNumber class]],
+                 kMaximumProximity: [self getValueForSelector:kMaximumProximity withType: [NSNumber class]],
+                 kLastDownload: [self getValueForSelector:kLastDownload withType: [NSDate class]],
+                 kLastTrigger: [self getValueForSelector:kLastTrigger withType: [NSDate class]],
+                 kStartDate: [self getValueForSelector:kStartDate withType: [NSDate class]],
+                 kEndDate: [self getValueForSelector:kEndDate withType: [NSDate class]],
+                 kWaitingForTrigger: [self getValueForSelector:kWaitingForTrigger withType: [NSNumber class]],
+                 kLastUpdated: [self getValueForSelector:kLastUpdated withType: [NSDate class]],
+                 kTimeslots: [self getValueForSelector:kTimeslots withType: [NSArray class]],
+                 kTitle: [self getValueForSelector:kTitle withType: [NSString class]],
+                 kNotificationText: [self getValueForSelector:kNotificationText withType: [NSString class]],
+                 kSummary: [self getValueForSelector:kSummary withType: [NSString class]],
+                 kTriggerDelay: [self getValueForSelector:kTriggerDelay withType: [NSNumber class]],
+                 kShopJoyContentType: [self getValueForSelector:kShopJoyContentType withType: [NSNumber class]],
+                 kContentData: [self getValueForSelector:kContentData withType: [NSString class]],
+                 };
+    } @catch (NSException *exception) {
+        NSLog(@"Error getting JSON. %@", exception.description);
+        return @{};
+    } @finally {
+    }
 }
 
 @end

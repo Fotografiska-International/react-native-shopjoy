@@ -52,6 +52,9 @@ const shopJoy = {
   },
   stopMonitoring: () => {
     RNReactNativeShopjoy.stopMonitoring();
+  },
+  emptyMemory: () => {
+    RNReactNativeShopjoy.emptyMemory();
   }
 }
 
