@@ -77,7 +77,7 @@ RCT_EXPORT_METHOD(setUserIdentifier: (NSString *) userIdentifier)
 RCT_EXPORT_METHOD(version: (RCTResponseSenderBlock) callback)
 {
     NSString *version = [self.shopJoyManager version];
-     callback(@[[NSNull null], version]);
+     callback(@[version]);
 }
 
 RCT_EXPORT_METHOD(startMonitoring)
@@ -93,6 +93,11 @@ RCT_EXPORT_METHOD(stopMonitoring)
 RCT_EXPORT_METHOD(emptyMemory)
 {
     [self.shopJoyManager emptyMemory];
+}
+
+RCT_EXPORT_METHOD(setLogLevel: (NSInteger) logLevel)
+{
+    [self.shopJoyManager setLogLevel:(ShopJoyLogLevel)logLevel];
 }
 
 #pragma mark - Private methods.

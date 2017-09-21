@@ -17,6 +17,12 @@ type ShopJoyCallbacks = {
   shopJoyReportsBackgroundMode: ?Function,
 }
 
+const ShopJoyLogLevel = {
+  none: 0,
+  errors: 1,
+  verbose: 2,
+}
+
 const shopJoy = {
   initShopJoy: (options: ShopJoyInitOptions = {}) => {
     RNReactNativeShopjoy.initShopJoy(options.apiKey, options.userIdentifier);
@@ -52,6 +58,16 @@ const shopJoy = {
   emptyMemory: () => {RNReactNativeShopjoy.emptyMemory();},
   setUserIdentifier: (userIdentifier) => {RNReactNativeShopjoy.setUserIdentifier(userIdentifier);},
   version: (callback) => {RNReactNativeShopjoy.version(callback);},
+  setLogLevel: (logLevel) => {
+    if (logLevel > 2 || logLevel < 0) {
+      throw "ShopJoyLogLevel should be between 0 and 2";
+    } else {
+      RNReactNativeShopjoy.setLogLevel(logLevel);
+    }
+  }
 }
 
-export default shopJoy;
+export {
+  shopJoy,
+  ShopJoyLogLevel
+};
