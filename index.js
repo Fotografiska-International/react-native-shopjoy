@@ -23,36 +23,44 @@ const ShopJoyLogLevel = {
   verbose: 2,
 }
 
+const startListeningToCallbacks = (callbacks: ShopJoyCallbacks = {}) => {
+  let eventEmitter = new NativeEventEmitter(RNReactNativeShopjoy);
+  eventEmitter.addListener(RNReactNativeShopjoy.SHOP_JOY_CAMPAIGN_TRIGGERED, callbacks.shopJoyCampaignTrigged,
+    reminder => console.log(reminder.name),
+  );
+
+  eventEmitter.addListener(RNReactNativeShopjoy.SHOP_JOY_REPORTS_OUTDATED_CAMPAIGN, callbacks.shopJoyReportsOutdatedCampaign,
+    reminder => console.log(reminder.name),
+  );
+
+  eventEmitter.addListener(RNReactNativeShopjoy.SHOP_JOY_QUEST_COMPLETED, callbacks.shopJoyQuestCompleted,
+    reminder => console.log(reminder.name),
+  );
+
+  eventEmitter.addListener(RNReactNativeShopjoy.SHOP_JOY_QUEST_PARTLY_COMPLETED, callbacks.shopJoyQuestPartlyCompleted,
+    reminder => console.log(reminder.name),
+  );
+
+  eventEmitter.addListener(RNReactNativeShopjoy.SHOP_JOY_REPORTS_BLUETOOTH_STATE, callbacks.shopJoyReportsBluetoothState,
+    reminder => console.log(reminder.name),
+  );
+
+  eventEmitter.addListener(RNReactNativeShopjoy.SHOP_JOY_REPORTS_BACKGROUND_MODE, callbacks.shopJoyReportsBackgroundMode,
+    reminder => console.log(reminder.name),
+  );
+};
+
+const setLogLevel = (logLevel) => {
+  if (logLevel > 2 || logLevel < 0) {
+    throw "ShopJoyLogLevel should be between 0 and 2";
+  } else {
+    RNReactNativeShopjoy.setLogLevel(logLevel);
+  }
+}
+
 const shopJoy = {
-  initShopJoy: (options: ShopJoyInitOptions = {}) => {
-    RNReactNativeShopjoy.initShopJoy(options.apiKey, options.userIdentifier);
-  },
-  startListeningToCallbacks: (callbacks: ShopJoyCallbacks = {}) => {
-    let eventEmitter = new NativeEventEmitter(RNReactNativeShopjoy);
-    eventEmitter.addListener(RNReactNativeShopjoy.SHOP_JOY_CAMPAIGN_TRIGGERED, callbacks.shopJoyCampaignTrigged,
-      reminder => console.log(reminder.name),
-    );
-
-    eventEmitter.addListener(RNReactNativeShopjoy.SHOP_JOY_REPORTS_OUTDATED_CAMPAIGN, callbacks.shopJoyReportsOutdatedCampaign,
-      reminder => console.log(reminder.name),
-    );
-
-    eventEmitter.addListener(RNReactNativeShopjoy.SHOP_JOY_QUEST_COMPLETED, callbacks.shopJoyQuestCompleted,
-      reminder => console.log(reminder.name),
-    );
-
-    eventEmitter.addListener(RNReactNativeShopjoy.SHOP_JOY_QUEST_PARTLY_COMPLETED, callbacks.shopJoyQuestPartlyCompleted,
-      reminder => console.log(reminder.name),
-    );
-
-    eventEmitter.addListener(RNReactNativeShopjoy.SHOP_JOY_REPORTS_BLUETOOTH_STATE, callbacks.shopJoyReportsBluetoothState,
-      reminder => console.log(reminder.name),
-    );
-
-    eventEmitter.addListener(RNReactNativeShopjoy.SHOP_JOY_REPORTS_BACKGROUND_MODE, callbacks.shopJoyReportsBackgroundMode,
-      reminder => console.log(reminder.name),
-    );
-  },
+  initShopJoy: (options: ShopJoyInitOptions = {}) => {RNReactNativeShopjoy.initShopJoy(options.apiKey, options.userIdentifier);},
+  startListeningToCallbacks,
   startMonitoring: () => {RNReactNativeShopjoy.startMonitoring();},
   stopMonitoring: () => {RNReactNativeShopjoy.stopMonitoring();},
   emptyMemory: () => {RNReactNativeShopjoy.emptyMemory();},
@@ -68,13 +76,7 @@ const shopJoy = {
   reloadRemoteConfiguration: () => {RNReactNativeShopjoy.reloadRemoteConfiguration();}, // Todo: Test
   openedQuest: (questId) => {RNReactNativeShopjoy.openedQuest(questId);}, // Todo: Test
   openedCampaign: (campaignId) => {RNReactNativeShopjoy.openedCampaign(campaignId);}, // Todo: Test
-  setLogLevel: (logLevel) => {
-    if (logLevel > 2 || logLevel < 0) {
-      throw "ShopJoyLogLevel should be between 0 and 2";
-    } else {
-      RNReactNativeShopjoy.setLogLevel(logLevel);
-    }
-  }
+  setLogLevel
 }
 
 export {
