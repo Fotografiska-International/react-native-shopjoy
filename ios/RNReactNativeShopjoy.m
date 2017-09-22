@@ -108,13 +108,21 @@ RCT_EXPORT_METHOD(sendLogReportToShopJoyTeamWithMessage: (NSString *) logReport)
 RCT_EXPORT_METHOD(returnQuestMemory: (RCTResponseSenderBlock) callback)
 {
     NSArray *questMemory = [self.shopJoyManager returnQuestMemory];
-    callback(@[questMemory]);
+    NSMutableArray *serializedQuests = [NSMutableArray new];
+    for (ShopJoyCampaign *quest in questMemory) {
+        [serializedQuests addObject:[quest getAsDictionary]];
+    }
+    callback(@[serializedQuests]);
 }
 
 RCT_EXPORT_METHOD(returnCampaignMemory: (RCTResponseSenderBlock) callback)
 {
     NSArray *campaignMemory = [self.shopJoyManager returnCampaignMemory];
-    callback(@[campaignMemory]);
+    NSMutableArray *serializedCampaigns = [NSMutableArray new];
+    for (ShopJoyCampaign *campaign in campaignMemory) {
+        [serializedCampaigns addObject:[campaign getAsDictionary]];
+    }
+    callback(@[serializedCampaigns]);
 }
 
 RCT_EXPORT_METHOD(removeCampaignFromMemory: (NSString *) campaignId)
@@ -209,7 +217,7 @@ RCT_EXPORT_METHOD(openedCampaign: (NSString *) campaignId)
 
 - (void)shopJoyQuestCompleted:(ShopJoyQuest *)quest {
     NSLog(@"%s %s", __PRETTY_FUNCTION__, __FUNCTION__);
-    [self postNotificationName: kShopJoyQuestCompleted withPayload: @{@"message" : @"Quest completed", @"data": quest}];
+    [self postNotificationName: kShopJoyQuestCompleted withPayload: @{@"message" : @"Quest completed", @"data": [quest getAsDictionary]}];
 }
 
 - (void)shopJoyQuestPartlyCompleted:(ShopJoyQuest *)quest {
