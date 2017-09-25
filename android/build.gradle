@@ -1,6 +1,7 @@
 
 buildscript {
     repositories {
+        mavenCentral()
         jcenter()
     }
 
@@ -27,17 +28,17 @@ android {
 }
 
 repositories {
-    mavenCentral()
     jcenter()
+    mavenCentral()
     flatDir {
-        dirs 'libs'
+        dirs 'aars'
     }
 }
 
 dependencies {
+    compile(name:'shopJoySDK-release', ext:'aar')
     compile 'com.facebook.react:react-native:+'
     compile 'com.squareup.okhttp:okhttp:2.5.0'
     compile 'com.google.android.gms:play-services-location:8.4.0'
-    compile project(':shopJoySDK-release')
 }
   
