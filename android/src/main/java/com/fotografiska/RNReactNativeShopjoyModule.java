@@ -111,9 +111,39 @@ public class RNReactNativeShopjoyModule extends ReactContextBaseJavaModule {
         return map;
     }
 
-    private static void sendEvent(String eventName, @Nullable HashMap params) {
+    private static void sendEvent(String eventName, @Nullable WritableMap params) {
         reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
                 .emit(eventName, params);
+    }
+
+    private static WritableMap getWritableMap(Object object) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            HashMap map = mapper.convertValue(object, HashMap.class);
+            WritableMap data = Arguments.createMap();
+            for (Object key : map.keySet()) {
+                Log.d(TAG, "Key: " + key + ", Value: " + map.get(key));
+                Object value = map.get(key);
+                switch (value.getClass().getName()) {
+                    case "java.lang.Boolean":
+                        data.putBoolean((String) key, (Boolean) value);
+                        break;
+                    case "java.lang.Integer":
+                        data.putInt((String) key, (Integer) value);
+                        break;
+                    case "java.lang.Double":
+                        data.putDouble((String) key, (Double) value);
+                        break;
+                    case "java.lang.String":
+                        data.putString((String) key, (String) value);
+                        break;
+                }
+            }
+            return data;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static class RNReactNativeShopjoyCallbacks extends ShopJoyCallbacks {
@@ -121,20 +151,12 @@ public class RNReactNativeShopjoyModule extends ReactContextBaseJavaModule {
         public void onCampaignTriggered(Context context, HistoryEntry entry)
         {
             Log.d(TAG, "Campaign triggered");
-            ObjectMapper mapper = new ObjectMapper();
-            try {
-                HashMap map = mapper.convertValue(entry, HashMap.class);
-//                Bundle bundle = new Bundle();
-//                bundle.putSerializable("data", map);
-//                WritableMap writableMap = Arguments.fromBundle(bundle);
-                sendEvent(SHOP_JOY_CAMPAIGN_TRIGGERED, map);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            sendEvent(SHOP_JOY_CAMPAIGN_TRIGGERED, getWritableMap(entry));
         }
         @Override
         public void onQuestTriggered(Context context, Quest quest) {
             Log.d(TAG, "Quest triggered");
+            sendEvent(SHOP_JOY_QUEST_TRIGGERED, getWritableMap(quest));
         }
         @Override
         public void postServiceStartup(Context context) {
@@ -143,6 +165,9 @@ public class RNReactNativeShopjoyModule extends ReactContextBaseJavaModule {
         @Override
         public void enteredBeaconArea(Context context, String beaconID) {
             Log.d(TAG, "Entered beacon area: " + beaconID);
+            WritableMap data = Arguments.createMap();
+            data.putString("data", beaconID);
+            sendEvent(SHOP_JOY_ENTERED_BEACON_AREA, data);
         }
     }
 }
