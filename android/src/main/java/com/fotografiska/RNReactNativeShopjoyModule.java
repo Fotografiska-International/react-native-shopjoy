@@ -2,6 +2,7 @@
 package com.fotografiska;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
@@ -13,7 +14,9 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -108,7 +111,7 @@ public class RNReactNativeShopjoyModule extends ReactContextBaseJavaModule {
         return map;
     }
 
-    private static void sendEvent(String eventName, @Nullable WritableMap params) {
+    private static void sendEvent(String eventName, @Nullable HashMap params) {
         reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
                 .emit(eventName, params);
     }
@@ -118,10 +121,16 @@ public class RNReactNativeShopjoyModule extends ReactContextBaseJavaModule {
         public void onCampaignTriggered(Context context, HistoryEntry entry)
         {
             Log.d(TAG, "Campaign triggered");
-            WritableMap map = Arguments.createMap();
-
-            map.putString("message", "test: Campaign triggered");
-            sendEvent(SHOP_JOY_CAMPAIGN_TRIGGERED, map);
+            ObjectMapper mapper = new ObjectMapper();
+            try {
+                HashMap map = mapper.convertValue(entry, HashMap.class);
+//                Bundle bundle = new Bundle();
+//                bundle.putSerializable("data", map);
+//                WritableMap writableMap = Arguments.fromBundle(bundle);
+                sendEvent(SHOP_JOY_CAMPAIGN_TRIGGERED, map);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         @Override
         public void onQuestTriggered(Context context, Quest quest) {
