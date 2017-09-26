@@ -2,6 +2,7 @@
 package com.fotografiska;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -14,7 +15,8 @@ import se.injou.shopjoy.sdk.ShopJoySDK;
 
 public class RNReactNativeShopjoyModule extends ReactContextBaseJavaModule {
 
-    private final ReactApplicationContext reactContext;
+    private static String TAG = "RNShopJoyModule";
+    private ReactApplicationContext reactContext;
     private ShopJoySDK shopJoySDK;
 
     public RNReactNativeShopjoyModule(ReactApplicationContext reactContext) {
@@ -45,9 +47,17 @@ public class RNReactNativeShopjoyModule extends ReactContextBaseJavaModule {
     public void startMonitoring() {
         try {
             shopJoySDK.startMonitoring();
+
+            shopJoySDK.setCallback(new ShopJoySDK.TriggeredCampaignCallback() {
+                @Override
+                public void triggeredCampaign(HistoryEntry historyEntry, int i) {
+                    Log.d(TAG, "Triggered campaign: "+historyEntry.toString()+", number: "+i);
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     @ReactMethod
@@ -59,24 +69,47 @@ public class RNReactNativeShopjoyModule extends ReactContextBaseJavaModule {
         }
     }
 
+    @ReactMethod
+    public void emptyMemory() {
+        try {
+            shopJoySDK.clearAllCache();
+            shopJoySDK.clearAllHistory();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @ReactMethod
+    public void reloadRemoteConfiguration() {
+        try {
+            shopJoySDK.updateConfigFile(reactContext);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public String getName() {
         return "RNReactNativeShopjoy";
     }
 
-    public class RNReactNativeShopjoyCallbacks extends ShopJoyCallbacks {
+    public static class RNReactNativeShopjoyCallbacks extends ShopJoyCallbacks {
         @Override
         public void onCampaignTriggered(Context context, HistoryEntry entry)
         {
+            Log.d(TAG, "Campaign triggered");
         }
         @Override
         public void onQuestTriggered(Context context, Quest quest) {
+            Log.d(TAG, "Quest triggered");
         }
         @Override
         public void postServiceStartup(Context context) {
+            Log.d(TAG, "Post service startup");
         }
         @Override
         public void enteredBeaconArea(Context context, String beaconID) {
+            Log.d(TAG, "Entered beacon area: " + beaconID);
         }
     }
 }
