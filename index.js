@@ -1,5 +1,5 @@
 
-import { NativeModules, NativeEventEmitter } from 'react-native';
+import { NativeModules, NativeEventEmitter, Platform } from 'react-native';
 
 const { RNReactNativeShopjoy } = NativeModules;
 
@@ -11,6 +11,8 @@ type ShopJoyInitOptions = {
 type ShopJoyCallbacks = {
   shopJoyCampaignTrigged: Function,
   shopJoyReportsOutdatedCampaign: Function,
+  shopJoyQuestTrigged: ?Function,
+  shopJoyEnteredBeaconArea: ?Function,
   shopJoyQuestCompleted: ?Function,
   shopJoyQuestPartlyCompleted: ?Function,
   shopJoyReportsBluetoothState: ?Function,
@@ -29,25 +31,35 @@ const startListeningToCallbacks = (callbacks: ShopJoyCallbacks = {}) => {
     reminder => console.log(reminder.name),
   );
 
-  eventEmitter.addListener(RNReactNativeShopjoy.SHOP_JOY_REPORTS_OUTDATED_CAMPAIGN, callbacks.shopJoyReportsOutdatedCampaign,
-    reminder => console.log(reminder.name),
-  );
+  if (Platform.OS === 'android') {
+    eventEmitter.addListener(RNReactNativeShopjoy.SHOP_JOY_QUEST_TRIGGERED, callbacks.shopJoyQuestTrigged,
+      reminder => console.log(reminder.name),
+    );
 
-  eventEmitter.addListener(RNReactNativeShopjoy.SHOP_JOY_QUEST_COMPLETED, callbacks.shopJoyQuestCompleted,
-    reminder => console.log(reminder.name),
-  );
+    eventEmitter.addListener(RNReactNativeShopjoy.SHOP_JOY_ENTERED_BEACON_AREA, callbacks.shopJoyEnteredBeaconArea,
+      reminder => console.log(reminder.name),
+    );
+  } else {
+    eventEmitter.addListener(RNReactNativeShopjoy.SHOP_JOY_REPORTS_OUTDATED_CAMPAIGN, callbacks.shopJoyReportsOutdatedCampaign,
+      reminder => console.log(reminder.name),
+    );
 
-  eventEmitter.addListener(RNReactNativeShopjoy.SHOP_JOY_QUEST_PARTLY_COMPLETED, callbacks.shopJoyQuestPartlyCompleted,
-    reminder => console.log(reminder.name),
-  );
+    eventEmitter.addListener(RNReactNativeShopjoy.SHOP_JOY_QUEST_COMPLETED, callbacks.shopJoyQuestCompleted,
+      reminder => console.log(reminder.name),
+    );
 
-  eventEmitter.addListener(RNReactNativeShopjoy.SHOP_JOY_REPORTS_BLUETOOTH_STATE, callbacks.shopJoyReportsBluetoothState,
-    reminder => console.log(reminder.name),
-  );
+    eventEmitter.addListener(RNReactNativeShopjoy.SHOP_JOY_QUEST_PARTLY_COMPLETED, callbacks.shopJoyQuestPartlyCompleted,
+      reminder => console.log(reminder.name),
+    );
 
-  eventEmitter.addListener(RNReactNativeShopjoy.SHOP_JOY_REPORTS_BACKGROUND_MODE, callbacks.shopJoyReportsBackgroundMode,
-    reminder => console.log(reminder.name),
-  );
+    eventEmitter.addListener(RNReactNativeShopjoy.SHOP_JOY_REPORTS_BLUETOOTH_STATE, callbacks.shopJoyReportsBluetoothState,
+      reminder => console.log(reminder.name),
+    );
+
+    eventEmitter.addListener(RNReactNativeShopjoy.SHOP_JOY_REPORTS_BACKGROUND_MODE, callbacks.shopJoyReportsBackgroundMode,
+      reminder => console.log(reminder.name),
+    );
+  }
 };
 
 const setLogLevel = (logLevel) => {

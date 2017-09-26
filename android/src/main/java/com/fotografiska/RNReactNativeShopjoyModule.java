@@ -28,11 +28,8 @@ public class RNReactNativeShopjoyModule extends ReactContextBaseJavaModule {
     private static ReactApplicationContext reactContext;
     private ShopJoySDK shopJoySDK;
     private static String SHOP_JOY_CAMPAIGN_TRIGGERED = "SHOP_JOY_CAMPAIGN_TRIGGERED";
-    private static String SHOP_JOY_REPORTS_OUTDATED_CAMPAIGN = "SHOP_JOY_REPORTS_OUTDATED_CAMPAIGN";
-    private static String SHOP_JOY_QUEST_COMPLETED = "SHOP_JOY_QUEST_COMPLETED";
-    private static String SHOP_JOY_QUEST_PARTLY_COMPLETED = "SHOP_JOY_QUEST_PARTLY_COMPLETED";
-    private static String SHOP_JOY_REPORTS_BLUETOOTH_STATE = "SHOP_JOY_REPORTS_BLUETOOTH_STATE";
-    private static String SHOP_JOY_REPORTS_BACKGROUND_MODE = "SHOP_JOY_REPORTS_BACKGROUND_MODE";
+    private static String SHOP_JOY_QUEST_TRIGGERED = "SHOP_JOY_QUEST_TRIGGERED";
+    private static String SHOP_JOY_ENTERED_BEACON_AREA = "SHOP_JOY_ENTERED_BEACON_AREA";
 
     public RNReactNativeShopjoyModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -62,13 +59,6 @@ public class RNReactNativeShopjoyModule extends ReactContextBaseJavaModule {
     public void startMonitoring() {
         try {
             shopJoySDK.startMonitoring();
-
-            shopJoySDK.setCallback(new ShopJoySDK.TriggeredCampaignCallback() {
-                @Override
-                public void triggeredCampaign(HistoryEntry historyEntry, int i) {
-                    Log.d(TAG, "Triggered campaign: "+historyEntry.toString()+", number: "+i);
-                }
-            });
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -113,6 +103,8 @@ public class RNReactNativeShopjoyModule extends ReactContextBaseJavaModule {
     public Map<String, Object> getConstants() {
         Map<String, Object> map = new HashMap<>();
         map.put(SHOP_JOY_CAMPAIGN_TRIGGERED, SHOP_JOY_CAMPAIGN_TRIGGERED);
+        map.put(SHOP_JOY_QUEST_TRIGGERED, SHOP_JOY_QUEST_TRIGGERED);
+        map.put(SHOP_JOY_ENTERED_BEACON_AREA, SHOP_JOY_ENTERED_BEACON_AREA);
         return map;
     }
 
@@ -129,7 +121,7 @@ public class RNReactNativeShopjoyModule extends ReactContextBaseJavaModule {
             WritableMap map = Arguments.createMap();
 
             map.putString("message", "test: Campaign triggered");
-            sendEvent("SHOP_JOY_CAMPAIGN_TRIGGERED", map);
+            sendEvent(SHOP_JOY_CAMPAIGN_TRIGGERED, map);
         }
         @Override
         public void onQuestTriggered(Context context, Quest quest) {
