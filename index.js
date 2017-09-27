@@ -76,18 +76,20 @@ const shopJoy = {
   startMonitoring: () => {RNReactNativeShopjoy.startMonitoring();},
   stopMonitoring: () => {RNReactNativeShopjoy.stopMonitoring();},
   emptyMemory: () => {RNReactNativeShopjoy.emptyMemory();},
+  clearHistoryNew: () => {RNReactNativeShopjoy.clearHistoryNew();}
+  reloadRemoteConfiguration: () => {RNReactNativeShopjoy.reloadRemoteConfiguration();},
+  openedQuest: (questId) => {RNReactNativeShopjoy.openedQuest(questId);},
+  openedCampaign: (campaignId) => {RNReactNativeShopjoy.openedCampaign(campaignId);},
+  // iOS only.
+  returnCampaignMemory: (callback) => {RNReactNativeShopjoy.returnCampaignMemory(callback);},
   setUserIdentifier: (userIdentifier) => {RNReactNativeShopjoy.setUserIdentifier(userIdentifier);},
   version: (callback) => {RNReactNativeShopjoy.version(callback);},
   sendLogReportToShopJoyTeamWithMessage: (logReport) => {RNReactNativeShopjoy.sendLogReportToShopJoyTeamWithMessage(logReport);},
   returnQuestMemory: (callback) => {RNReactNativeShopjoy.returnQuestMemory(callback);},
-  returnCampaignMemory: (callback) => {RNReactNativeShopjoy.returnCampaignMemory(callback);},
   removeQuestFromMemory: (questId) => {RNReactNativeShopjoy.removeQuestFromMemory(questId);},
   removeCampaignFromMemory: (campaignId) => {RNReactNativeShopjoy.removeCampaignFromMemory(campaignId);},
   campaignWithId: (campaignId, callback) => {RNReactNativeShopjoy.campaignWithId(campaignId, callback);},
   questWithId: (questId, callback) => {RNReactNativeShopjoy.questWithId(questId, callback);},
-  reloadRemoteConfiguration: () => {RNReactNativeShopjoy.reloadRemoteConfiguration();},
-  openedQuest: (questId) => {RNReactNativeShopjoy.openedQuest(questId);},
-  openedCampaign: (campaignId) => {RNReactNativeShopjoy.openedCampaign(campaignId);},
   setLogLevel
 }
 

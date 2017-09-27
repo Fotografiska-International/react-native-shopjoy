@@ -12,15 +12,18 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import se.injou.shopjoy.sdk.HistoryEntry;
+import se.injou.shopjoy.sdk.HistoryLoader;
 import se.injou.shopjoy.sdk.Quest;
 import se.injou.shopjoy.sdk.ShopJoyCallbacks;
 import se.injou.shopjoy.sdk.ShopJoySDK;
@@ -33,6 +36,7 @@ public class RNReactNativeShopjoyModule extends ReactContextBaseJavaModule {
     private static String SHOP_JOY_CAMPAIGN_TRIGGERED = "SHOP_JOY_CAMPAIGN_TRIGGERED";
     private static String SHOP_JOY_QUEST_TRIGGERED = "SHOP_JOY_QUEST_TRIGGERED";
     private static String SHOP_JOY_ENTERED_BEACON_AREA = "SHOP_JOY_ENTERED_BEACON_AREA";
+    private static String SHOP_JOY_RETURNED_CAMPAIGN_MEMORY = "SHOP_JOY_RETURNED_CAMPAIGN_MEMORY";
 
     public RNReactNativeShopjoyModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -96,6 +100,24 @@ public class RNReactNativeShopjoyModule extends ReactContextBaseJavaModule {
         }
     }
 
+    @ReactMethod
+    public void clearHistoryNew() {
+        try {
+            shopJoySDK.clearHistoryNew();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @ReactMethod
+    public void openedCampaign(Object campaign) {
+        try {
+            Log.d(TAG, "Should set campaign as opened: " + campaign + ", campaign: " + campaign.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public String getName() {
         return "RNReactNativeShopjoy";
@@ -108,6 +130,7 @@ public class RNReactNativeShopjoyModule extends ReactContextBaseJavaModule {
         map.put(SHOP_JOY_CAMPAIGN_TRIGGERED, SHOP_JOY_CAMPAIGN_TRIGGERED);
         map.put(SHOP_JOY_QUEST_TRIGGERED, SHOP_JOY_QUEST_TRIGGERED);
         map.put(SHOP_JOY_ENTERED_BEACON_AREA, SHOP_JOY_ENTERED_BEACON_AREA);
+        map.put(SHOP_JOY_RETURNED_CAMPAIGN_MEMORY, SHOP_JOY_RETURNED_CAMPAIGN_MEMORY);
         return map;
     }
 
