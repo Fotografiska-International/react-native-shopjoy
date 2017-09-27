@@ -32,12 +32,12 @@ public class RNReactNativeShopjoyModule extends ReactContextBaseJavaModule {
 
     private static String TAG = "RNShopJoyModule";
     private static ReactApplicationContext reactContext;
+    private static Context context;
     private ShopJoySDK shopJoySDK;
     private static String SHOP_JOY_CAMPAIGN_TRIGGERED = "SHOP_JOY_CAMPAIGN_TRIGGERED";
     private static String SHOP_JOY_QUEST_TRIGGERED = "SHOP_JOY_QUEST_TRIGGERED";
     private static String SHOP_JOY_ENTERED_BEACON_AREA = "SHOP_JOY_ENTERED_BEACON_AREA";
-    private static String SHOP_JOY_RETURNED_CAMPAIGN_MEMORY = "SHOP_JOY_RETURNED_CAMPAIGN_MEMORY";
-
+    //    private static String SHOP_JOY_RETURNED_CAMPAIGN_MEMORY = "SHOP_JOY_RETURNED_CAMPAIGN_MEMORY";
     public RNReactNativeShopjoyModule(ReactApplicationContext reactContext) {
         super(reactContext);
         this.reactContext = reactContext;
@@ -110,12 +110,29 @@ public class RNReactNativeShopjoyModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void openedCampaign(Object campaign) {
+    public void openedCampaign(String campaignId) {
         try {
-            Log.d(TAG, "Should set campaign as opened: " + campaign + ", campaign: " + campaign.toString());
+            Log.d(TAG, "Should set campaign as opened: " + campaignId);
+            HistoryEntry historyEntry = getHistoryItem(campaignId);
+            historyEntry.markAsRead(reactContext);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private static HistoryEntry getHistoryItem(String campaignId) {
+        try {
+            HistoryLoader historyLoader = new HistoryLoader(reactContext);
+            ArrayList<HistoryEntry> historyEntries = historyLoader.loadInBackground();
+            for (HistoryEntry entry : historyEntries) {
+                if (entry.id.equals(campaignId)) {
+                    return entry;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
@@ -130,7 +147,7 @@ public class RNReactNativeShopjoyModule extends ReactContextBaseJavaModule {
         map.put(SHOP_JOY_CAMPAIGN_TRIGGERED, SHOP_JOY_CAMPAIGN_TRIGGERED);
         map.put(SHOP_JOY_QUEST_TRIGGERED, SHOP_JOY_QUEST_TRIGGERED);
         map.put(SHOP_JOY_ENTERED_BEACON_AREA, SHOP_JOY_ENTERED_BEACON_AREA);
-        map.put(SHOP_JOY_RETURNED_CAMPAIGN_MEMORY, SHOP_JOY_RETURNED_CAMPAIGN_MEMORY);
+//        map.put(SHOP_JOY_RETURNED_CAMPAIGN_MEMORY, SHOP_JOY_RETURNED_CAMPAIGN_MEMORY); // Todo: Implement in the future.
         return map;
     }
 
@@ -162,7 +179,9 @@ public class RNReactNativeShopjoyModule extends ReactContextBaseJavaModule {
                         break;
                 }
             }
-            return data;
+            WritableMap dataMap = Arguments.createMap();
+            dataMap.putMap("data", data);
+            return dataMap;
         } catch (Exception e) {
             e.printStackTrace();
         }
