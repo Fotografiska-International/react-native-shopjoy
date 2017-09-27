@@ -43,6 +43,67 @@
   - Add `new RNReactNativeShopjoyPackage()` to the `List<IReactPackage>` returned by the `Packages` method
 
 
+#### Essential steps to perform after linking.
+
+##### iOS
+
+1. Link libraries `CoreBluetooth`, `CoreLocation` and `libsqlite.3.0.tbd` in your target’s Build Phases tab.
+
+##### Android
+
+1. Add the following to the top-level `build.gradle`:
+
+```
+allprojects {
+    ...
+    repositories {
+        ...
+        flatDir {
+            dirs project(':react-native-shopjoy').file('aars')
+        }
+    }
+}
+```
+
+2. Add this to your app’s `AndroidManifest.xml` file.
+
+```
+<application>
+    ...
+    <service 
+        android:name="se.injou.shopjoy.sdk.BeaconScannerService" 
+        android:enabled="true" > 
+    </service> 
+    <service
+        android:name="se.injou.shopjoy.sdk.BackJobHandler" 
+        android:exported="false" 
+        android:permission="android.permission.BIND_JOB_SERVICE"> 
+    </service> 
+    <receiver
+        android:name="com.fotografiska.RNReactNativeShopjoyModule$RNReactNativeShopjoyCallbacks"
+        android:exported="false"> 
+        <intent-filter> 
+            <action android:name=”<your.package.name>.SHOPJOY_CALLBACKS"/> 
+        </intent-filter> 
+    </receiver>
+</application>
+```
+
+3. Add this to the app's `build.gradle`.
+
+```
+android {
+    ...
+    packagingOptions { 
+        exclude 'META-INF/DEPENDENCIES.txt' 
+        exclude 'META-INF/NOTICE' 
+        exclude 'META-INF/NOTICE.txt' 
+        exclude 'META-INF/LICENSE' 
+        exclude 'META-INF/LICENSE.txt' 
+    }
+}
+```
+
 ## Usage
 ```javascript
 import RNReactNativeShopjoy from 'react-native-shopjoy';
