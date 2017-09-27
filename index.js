@@ -78,9 +78,9 @@ const shopJoy = {
   emptyMemory: () => {RNReactNativeShopjoy.emptyMemory();},
   clearHistoryNew: () => {RNReactNativeShopjoy.clearHistoryNew();},
   reloadRemoteConfiguration: () => {RNReactNativeShopjoy.reloadRemoteConfiguration();},
-  openedQuest: (questId) => {RNReactNativeShopjoy.openedQuest(questId);},
   openedCampaign: (campaignId) => {RNReactNativeShopjoy.openedCampaign(campaignId);},
   // iOS only.
+  openedQuest: (questId) => {RNReactNativeShopjoy.openedQuest(questId);},
   returnCampaignMemory: (callback) => {RNReactNativeShopjoy.returnCampaignMemory(callback);},
   setUserIdentifier: (userIdentifier) => {RNReactNativeShopjoy.setUserIdentifier(userIdentifier);},
   version: (callback) => {RNReactNativeShopjoy.version(callback);},

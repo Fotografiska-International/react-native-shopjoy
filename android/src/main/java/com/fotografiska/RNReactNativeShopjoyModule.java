@@ -63,6 +63,16 @@ public class RNReactNativeShopjoyModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void setShopJoySettings(Object settings) {
+        // Todo: Implement in the future.
+        try {
+            Log.d(TAG, "Should set shopjoy settings with values" + settings.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @ReactMethod
     public void startMonitoring() {
         try {
             shopJoySDK.startMonitoring();
@@ -112,7 +122,6 @@ public class RNReactNativeShopjoyModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void openedCampaign(String campaignId) {
         try {
-            Log.d(TAG, "Should set campaign as opened: " + campaignId);
             HistoryEntry historyEntry = getHistoryItem(campaignId);
             historyEntry.markAsRead(reactContext);
         } catch (Exception e) {
@@ -162,7 +171,6 @@ public class RNReactNativeShopjoyModule extends ReactContextBaseJavaModule {
             HashMap map = mapper.convertValue(object, HashMap.class);
             WritableMap data = Arguments.createMap();
             for (Object key : map.keySet()) {
-                Log.d(TAG, "Key: " + key + ", Value: " + map.get(key));
                 Object value = map.get(key);
                 switch (value.getClass().getName()) {
                     case "java.lang.Boolean":
@@ -192,12 +200,10 @@ public class RNReactNativeShopjoyModule extends ReactContextBaseJavaModule {
         @Override
         public void onCampaignTriggered(Context context, HistoryEntry entry)
         {
-            Log.d(TAG, "Campaign triggered");
             sendEvent(SHOP_JOY_CAMPAIGN_TRIGGERED, getWritableMap(entry));
         }
         @Override
         public void onQuestTriggered(Context context, Quest quest) {
-            Log.d(TAG, "Quest triggered");
             sendEvent(SHOP_JOY_QUEST_TRIGGERED, getWritableMap(quest));
         }
         @Override
@@ -206,7 +212,6 @@ public class RNReactNativeShopjoyModule extends ReactContextBaseJavaModule {
         }
         @Override
         public void enteredBeaconArea(Context context, String beaconID) {
-            Log.d(TAG, "Entered beacon area: " + beaconID);
             WritableMap data = Arguments.createMap();
             data.putString("data", beaconID);
             sendEvent(SHOP_JOY_ENTERED_BEACON_AREA, data);
