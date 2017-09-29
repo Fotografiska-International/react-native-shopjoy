@@ -77,7 +77,7 @@ RCT_EXPORT_METHOD(setUserIdentifier: (NSString *) userIdentifier)
 RCT_EXPORT_METHOD(version: (RCTResponseSenderBlock) callback)
 {
     NSString *version = [self.shopJoyManager version];
-     callback(@[version]);
+    callback(@[version]);
 }
 
 RCT_EXPORT_METHOD(startMonitoring)
@@ -210,9 +210,9 @@ RCT_EXPORT_METHOD(openedCampaign: (NSString *) campaignId)
     [self postNotificationName: kShopJoyCampaignTriggered withPayload: @{@"data" : [campaign getAsDictionary]}];
 }
 
-- (void)shopJoyReportsOutdatedCampaign:(NSString *)campaignID {
+- (void)shopJoyReportsOutdatedCampaign:(ShopJoyCampaign *)campaign {
     NSLog(@"%s %s", __PRETTY_FUNCTION__, __FUNCTION__);
-    [self postNotificationName: kShopJoyReportsOutdatedCampaign withPayload: @{@"message" : @"Reporting outdated campaign", @"data": campaignID}];
+    [self postNotificationName: kShopJoyReportsOutdatedCampaign withPayload: @{@"data" : [campaign getAsDictionary]}];
 }
 
 - (void)shopJoyQuestCompleted:(ShopJoyQuest *)quest {
