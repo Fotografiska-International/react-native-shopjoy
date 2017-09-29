@@ -26,6 +26,8 @@
             id value = [self valueForKey:selector];
             if ([value isKindOfClass:[NSDate class]]) {
                 return @([((NSDate*) value) timeIntervalSince1970]);
+            } else if ([(NSStringFromClass([value class])) isEqualToString:@"ShopJoyBeaconRegion"]) {
+                return [value getAsDictionary];
             }
             return value;
         } else {
