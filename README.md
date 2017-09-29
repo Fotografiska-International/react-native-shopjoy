@@ -48,7 +48,8 @@
 ##### iOS
 
 1. Link libraries `CoreBluetooth`, `CoreLocation` and `libsqlite.3.0.tbd` in your target’s Build Phases tab.
-2. Required since iOS 8: Add the `NSLocationAlwaysUsageDescription​` key to your app’s `Info.plist`. Add a string with the description you want to show to your users when the app asks their permission for location updates. This string will also be shown when the user is asked to re­confirm his/her consent a few days after installation.
+2. Also link `libRNReactNativeShopjoy.a` to your target if it isn't already.
+3. Required since iOS 8: Add the `NSLocationAlwaysUsageDescription​` key to your app’s `Info.plist`. Add a string with the description you want to show to your users when the app asks their permission for location updates. This string will also be shown when the user is asked to re­confirm his/her consent a few days after installation.
 
 ##### Android
 
@@ -102,6 +103,9 @@ android {
 ```
 
 ## Usage
+
+Under works...
+
 ```javascript
 import RNReactNativeShopjoy from 'react-native-shopjoy';
 
