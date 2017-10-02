@@ -63,16 +63,6 @@ public class RNReactNativeShopjoyModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void setShopJoySettings(Object settings) {
-        // Todo: Implement in the future.
-        try {
-            Log.d(TAG, "Should set shopjoy settings with values" + settings.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @ReactMethod
     public void startMonitoring() {
         try {
             shopJoySDK.startMonitoring();
