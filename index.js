@@ -73,6 +73,8 @@ const setLogLevel = (logLevel) => {
 const shopJoy = {
   initShopJoy: (options: ShopJoyInitOptions = {}) => {RNReactNativeShopjoy.initShopJoy(options.apiKey, options.userIdentifier);},
   startListeningToCallbacks,
+  registerShopJoy: () => {RNReactNativeShopjoy.registerShopJoy();},
+  unregisterShopJoy: () => {RNReactNativeShopjoy.unregisterShopJoy();},
   startMonitoring: () => {RNReactNativeShopjoy.startMonitoring();},
   stopMonitoring: () => {RNReactNativeShopjoy.stopMonitoring();},
   emptyMemory: () => {RNReactNativeShopjoy.emptyMemory();},

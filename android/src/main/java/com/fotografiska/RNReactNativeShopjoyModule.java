@@ -42,12 +42,22 @@ public class RNReactNativeShopjoyModule extends ReactContextBaseJavaModule {
         super(reactContext);
         this.reactContext = reactContext;
         this.shopJoySDK = new ShopJoySDK();
-        registerShopJoy();
+//        registerShopJoy();
     }
 
+    @ReactMethod
     private void registerShopJoy() {
         try {
-            shopJoySDK.register(reactContext, false);
+            ShopJoySDK.register(reactContext, false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @ReactMethod
+    private void unregisterShopJoy() {
+        try {
+            ShopJoySDK.unregister(reactContext);
         } catch (Exception e) {
             e.printStackTrace();
         }
