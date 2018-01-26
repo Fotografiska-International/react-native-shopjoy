@@ -256,6 +256,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/shopjoy_ios_sdk_v2_rc17",
 				);
+				OTHER_CFLAGS = "-fembed-bitcode";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = RNReactNativeShopjoy;
 				SKIP_INSTALL = YES;
@@ -277,6 +278,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/shopjoy_ios_sdk_v2_rc17",
 				);
+				OTHER_CFLAGS = "-fembed-bitcode";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = RNReactNativeShopjoy;
 				SKIP_INSTALL = YES;

@@ -1,8 +1,7 @@
-
 {
   "name": "react-native-shopjoy",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.2",
+  "description": "## Getting started",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,9 +9,20 @@
   "keywords": [
     "react-native"
   ],
-  "author": "",
-  "license": "",
+  "author": "Rameez Hussain",
+  "license": "ISC",
   "peerDependencies": {
     "react-native": ">=0.44.0"
-  }
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fotografiska-International/react-native-shopjoy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Fotografiska-International/react-native-shopjoy/issues"
+  },
+  "homepage": "https://github.com/Fotografiska-International/react-native-shopjoy#readme"
 }
