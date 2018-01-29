@@ -1,5 +1,5 @@
 
-package com.fotografiska;
+package com.fotografiska.shopjoy;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -16,7 +16,7 @@ public class RNReactNativeShopjoyPackage implements ReactPackage {
       return Arrays.<NativeModule>asList(new RNReactNativeShopjoyModule(reactContext));
     }
 
-    @Override
+//    @Override
     public List<Class<? extends JavaScriptModule>> createJSModules() {
         return Collections.emptyList();
     }

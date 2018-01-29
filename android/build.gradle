@@ -42,4 +42,5 @@ dependencies {
     compile 'com.google.android.gms:play-services-location:8.4.0'
     compile files('jars/com.fasterxml.jackson.core.jar')
     compile files('jars/com.fasterxml.jackson.databind.jar')
+    compile files('jars/com.fasterxml.jackson.annotations.jar')
 }
