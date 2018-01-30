@@ -156,8 +156,12 @@ public class RNReactNativeShopjoyModule extends ReactContextBaseJavaModule {
     }
 
     private static void sendEvent(String eventName, @Nullable WritableMap params) {
-        reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-                .emit(eventName, params);
+        try {
+            reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                    .emit(eventName, params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private static WritableMap getWritableMap(Object object) {
