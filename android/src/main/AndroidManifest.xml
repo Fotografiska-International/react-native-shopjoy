@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <application>
+    <!-- <application>
         <service
             android:name="se.injou.shopjoy.sdk.BeaconScannerService"
             android:enabled="true" >
@@ -14,12 +14,10 @@
             android:exported="false"
             android:permission="android.permission.BIND_JOB_SERVICE">
         </service>
-        <!--ShopJoy settings-->
         <receiver android:name=".RNReactNativeShopjoyModule$RNReactNativeShopjoyCallbacks" android:exported="false">
             <intent-filter>
             <action android:name="com.fotografiska.shopjoy.SHOPJOY_CALLBACKS"/>
             </intent-filter>
         </receiver>
-    </application>
+    </application> -->
 </manifest>
-  
