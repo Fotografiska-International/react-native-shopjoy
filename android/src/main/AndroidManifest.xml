@@ -1,23 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.fotografiska.shopjoy">
-    <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="23" tools:overrideLibrary="se.injou.shopjoy.sdk"/>
+    <uses-sdk tools:overrideLibrary="se.injou.shopjoy.sdk"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <!-- <application>
-        <service
-            android:name="se.injou.shopjoy.sdk.BeaconScannerService"
-            android:enabled="true" >
-        </service>
-        <service android:name="se.injou.shopjoy.sdk.BackJobHandler"
-            android:exported="false"
-            android:permission="android.permission.BIND_JOB_SERVICE">
-        </service>
-        <receiver android:name=".RNReactNativeShopjoyModule$RNReactNativeShopjoyCallbacks" android:exported="false">
-            <intent-filter>
-            <action android:name="com.fotografiska.shopjoy.SHOPJOY_CALLBACKS"/>
-            </intent-filter>
-        </receiver>
-    </application> -->
 </manifest>
